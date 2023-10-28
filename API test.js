@@ -1,8 +1,8 @@
 getInfo();
 
 async function getInfo(){
-    var response = await fetch("https://na.business-api.amazon.com/products/2020-08-26/products?productRegion=US&locale=en", {headers: {
-            "x-amz-user-email": ""
+    var response = await fetch("https://api.pexels.com/v1/search?query=nature&per_page=1", {headers: {
+            "Authorization": "q0yzqQvVpqjDupi4BQnet58qlhVyOcksy2SVxQJyHwoVtxWSgOUTD7oP"
         }
     });
     var inJson = await response.json();
