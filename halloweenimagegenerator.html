@@ -2,24 +2,22 @@
 <html lang="en-US">
     <head>
         <meta charset="UTF-8">
-        <meta name="author" content="Halloween Costumes">
-        <meta name="description" content="This page contains all halloween costumes for all age groups.">
-        <title>Halloween Costumes</title>
-        <link rel="icon" href="weblogo.png" type="image/x-icon">
+        <meta name="author" content="Halloween Image Generator">
+        <meta name="description" content="This page contains all halloween images.">
+        <title>Halloween Image Generator</title>
         <link rel="stylesheet" href="main.css" type="text/css">
    </head> 
 
    <body>
     <header>
 
-      <h1>Halloween Costume Finder</h1>
+      <h1>Halloween Image Generator</h1>
 
-    <img src="img/jackolatern.png" alt="Jack-O-Lantern" width="200" height="200" loading="eager"></img>
-      <form action="https://httpbin.org/get" method="get">
+    <img src="jackolatern.png" alt="Jack-O-Lantern" width="200" height="200" loading="eager"></img>
 
             <p>
-                <label for="search">Halloween Costume Search:</label>
-                <input type="text" name="search" id="search" placeholder="Grimace Costume" autocomplete="off" required
+                <label for="search">Search for an Image:</label>
+                <input type="text" name="search" id="search" placeholder="Grimace" autocomplete="off" required
                     autofocus><button type="submit">Submit</button>
             </p>
             </form>
@@ -30,17 +28,41 @@
             <br>
             
 
-       <p>Can't decide on a costume? Here are some top suggestions! 
-       <form action="https://httpbin.org/get" method="get">
+       <p>Here are some top suggestions! 
         <select name="halloweencostumes" id="halloweencostumes" multiple size="4">
-                <option value="latte" >Batman</option>
-                <option value="cappuccino">Tinkerbell</option>
-                <option value="cortado">Spongebob</option>
-                <option value="americano">Barbie</option>
+                <option value="batman" >Batman</option>
+                <option value="tinkerbell">Tinkerbell</option>
+                <option value="spongebob">Spongebob</option>
+                <option value="barbie">Barbie</option>
         </select>
-        <button type="submit">Submit</button>
-    </form>
+        <button id = "aaaa" onclick='''>Submit</button>
     </p>
+    <p id="testOut"></p>
+
+    <script >
+
+      async function callAPI(){
+          const CITY_INPUT_ID = "search";
+          const DROPDOWN_ID = "halloweencostumes";
+          const TEMP_OUTPUT_ID = "testOut";
+
+          var cityName = document.getElementById(DROPDOWN_ID).value;
+          if (cityName == ""){
+              cityName = document.getElementById(TEMP_OUTPUT_ID).value;
+          }
+
+          var response = await fetch("https://api.weatherbit.io/v2.0/current?units=I&city=" + cityName + "&key=d418ebdc744e4aeab55db0226a47c060");
+          var inJson = await response.json();
+
+          temperature = inJson.data[0].temp;
+          console.log(temperature);
+          if (temperature != null){
+              document.getElementById(TEMP_OUTPUT_ID).innerText = "" + inJson.data[0].temp;
+          } else {
+              document.getElementById(TEMP_OUTPUT_ID).innerText = "No temperature!";
+          }
+      }
+    </script>
     
         
 
