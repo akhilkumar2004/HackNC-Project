@@ -2,6 +2,9 @@ async function callAPI(useddropdown){
     const CITY_INPUT_ID = "search";
     const DROPDOWN_ID = "halloweencostumes";
     const TEMP_OUTPUT_ID = "tempOut";
+    const CLOUD_OUTPUT_ID = "cloudOut";
+    const WEATHER = "dailyForecast";
+
 
     
     if (useddropdown){
@@ -19,9 +22,25 @@ async function callAPI(useddropdown){
     var inJson = await response.json();
 
     temperature = inJson.data[0].temp;
+    weatherDescrip = inJson.data[0].weather.description;
+
     if (temperature != null){
         document.getElementById(TEMP_OUTPUT_ID).innerText = cityName + ": " + inJson.data[0].temp + "°F";
     } else {
         document.getElementById(TEMP_OUTPUT_ID).innerText = "No temperature!";
     }
+    if (weatherDescrip != null){
+        document.getElementById(CLOUD_OUTPUT_ID).innerText =  "Weather Description: " + inJson.data[0].weather.description;
+    } else {
+        document.getElementById(CLOUD_OUTPUT_ID).innerText = "No data!";
+    }
+
+    var img = document.getElementById("icons");
+    img.src = "https://cdn.weatherbit.io/static/img/icons/" + inJson.data[0].weather.icon + ".png";
+    
+   
+
+    
+
+
 }
